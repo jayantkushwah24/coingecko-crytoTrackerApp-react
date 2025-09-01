@@ -1,7 +1,6 @@
-import React from "react";
-import axiosInstance from "../utils/axiosInstances";
+import axiosInstance from "../utils/axiosInstances.js";
 
-export async function fetchCoinData(page = 1, currency = "usd") {
+export async function fetchCoinData(page = 1, currency) {
   const perPage = 10;
   try {
     const response = await axiosInstance.get(

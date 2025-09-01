@@ -3,7 +3,7 @@ import React from "react";
 const Banner = () => {
   return (
     <div
-      className="w-screen h-[50vh] bg-cover bg-center relative shadow-lg"
+      className="w-screen h-[50vh] bg-cover bg-top relative shadow-lg"
       style={{
         backgroundImage:
           "url('https://media.istockphoto.com/id/1463455851/photo/cryptocurrency-market-financial-data-and-candlesticks-internet-banking.jpg?s=1024x1024&w=is&k=20&c=iTK_kYVDlAibVlQ7L-CgR0NVezeg5mhS0Jk8lVyLHdc=')",

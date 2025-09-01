@@ -1,22 +1,24 @@
-import { useState } from "react";
-import { fetchCoinData } from "../service/fetchCoinData";
+import { useContext, useEffect, useState } from "react";
+import { fetchCoinData } from "../service/fetchCoinData.js";
 import { useQuery } from "@tanstack/react-query";
+import { CurrencyContext } from "../context/CurrencyContext.js";
 
 const CoinTable = () => {
   const [page, setPage] = useState(1);
+  const { currency } = useContext(CurrencyContext);
 
   const { data, isLoading, isError, error } = useQuery({
-    queryKey: ["coins", page],
-    queryFn: () => fetchCoinData(page, "usd"),
+    queryKey: ["coins", page, currency],
+    queryFn: () => fetchCoinData(page, currency),
     retry: 2,
     retryDelay: 1000,
     gcTime: 1000 * 60 * 2,
-    placeholderData: true,
+    placeholderData: [],
   });
-  console.log(data);
 
   if (isLoading) return <div>Loading...</div>;
-  if (isError) return <div>{error.message}</div>;
+  if (isError)
+    return <div>Error: {error?.message || "Something went wrong"}</div>;
 
   return (
     <div>
@@ -48,7 +50,8 @@ const CoinTable = () => {
                   <span className="font-medium">{coin.name}</span>
                 </div>
                 <div className="w-1/4 py-3 px-4 font-mono text-gray-700">
-                  ${coin.current_price.toLocaleString()}
+                  <span>{currency === "usd" ? "$" : "₹"}</span>
+                  {coin.current_price.toLocaleString()}
                 </div>
                 <div
                   className={`w-1/4 py-3 px-4 font-medium ${
@@ -57,7 +60,7 @@ const CoinTable = () => {
                       : "text-red-600"
                   }`}
                 >
-                  {coin.price_change_24h.toFixed(2)}%
+                  {coin.price_change_percentage_24h?.toFixed(2)}%
                 </div>
                 <div className="w-1/4 py-3 px-4 text-gray-700">
                   ${coin.market_cap.toLocaleString()}
