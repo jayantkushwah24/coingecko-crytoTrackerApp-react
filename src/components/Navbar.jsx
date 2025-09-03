@@ -1,13 +1,19 @@
 // import React, { useContext } from "react";
 // import { CurrencyContext } from "../context/CurrencyContext.js";
+import { useNavigate } from "react-router-dom";
 import currencyStore from "../state/store.js";
 
 const Navbar = () => {
   // const { currency, setCurrency } = useContext(CurrencyContext);
   const { currency, setCurrency } = currencyStore();
+  const navigate = useNavigate();
+
+  function goToHome() {
+    navigate("/");
+  }
 
   return (
-    <div className="navbar bg-white shadow-md px-6 fixed top-0 left-0 right-0 z-50">
+    <div className="navbar bg-white shadow-md px-6 sticky top-0 left-0 right-0 z-50">
       {/* Left Section (Menu) */}
       <div className="navbar-start">
         <div className="dropdown">
@@ -61,7 +67,7 @@ const Navbar = () => {
       </div>
 
       {/* Center Section (Logo / Brand) */}
-      <div className="navbar-center">
+      <div onClick={goToHome} className="navbar-center cursor-pointer">
         <a className="text-2xl font-extrabold text-yellow-500 tracking-wide hover:text-yellow-600 transition">
           Crypto Tracker
         </a>
