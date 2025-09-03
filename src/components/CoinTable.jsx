@@ -2,12 +2,14 @@ import { useContext, useState } from "react";
 import { fetchCoinData } from "../service/fetchCoinData.js";
 import { useQuery } from "@tanstack/react-query";
 // import { CurrencyContext } from "../context/CurrencyContext.js";
-import currencyStore from '../state/store.js'
+import currencyStore from "../state/store.js";
+import { useNavigate } from "react-router-dom";
 
 const CoinTable = () => {
   const [page, setPage] = useState(1);
   // const { currency } = useContext(CurrencyContext);
   const { currency } = currencyStore();
+  const navigate = useNavigate();
 
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ["coins", page, currency],
@@ -17,6 +19,10 @@ const CoinTable = () => {
     gcTime: 1000 * 60 * 2,
     placeholderData: [],
   });
+
+  function handlePageRedirect(id) {
+    navigate(`/details/${id}`);
+  }
 
   if (isLoading) return <div>Loading...</div>;
   if (isError)
@@ -41,7 +47,8 @@ const CoinTable = () => {
             data.map((coin) => (
               <div
                 key={coin.id}
-                className="flex items-center hover:bg-gray-50 transition duration-200"
+                className="flex items-center hover:bg-gray-200 transition duration-200 cursor-pointer"
+                onClick={() => handlePageRedirect(coin.id)}
               >
                 <div className="w-1/4 py-3 px-4 flex items-center space-x-3">
                   <img
