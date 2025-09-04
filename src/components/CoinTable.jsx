@@ -56,6 +56,7 @@ const CoinTable = () => {
                     src={coin.image}
                     alt={coin.name}
                     className="w-6 h-6 rounded-full"
+                    loading="lazy"
                   />
                   <span className="font-medium">{coin.name}</span>
                 </div>
