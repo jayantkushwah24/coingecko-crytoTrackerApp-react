@@ -56,7 +56,7 @@ const CoinDetailsPage = () => {
   }, [coinId, data]);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <div>downloading coin details...</div>;
   }
   if (isError) {
     return <div>Something went wrong</div>;

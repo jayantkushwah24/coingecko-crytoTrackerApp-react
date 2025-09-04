@@ -1,9 +1,10 @@
-import { useContext, useState } from "react";
+import { Suspense, useState } from "react";
 import { fetchCoinData } from "../service/fetchCoinData.js";
 import { useQuery } from "@tanstack/react-query";
 // import { CurrencyContext } from "../context/CurrencyContext.js";
 import currencyStore from "../state/store.js";
 import { useNavigate } from "react-router-dom";
+import { Instagram } from "react-content-loader";
 
 const CoinTable = () => {
   const [page, setPage] = useState(1);
@@ -24,7 +25,7 @@ const CoinTable = () => {
     navigate(`/details/${id}`);
   }
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <Suspense fallback={<Instagram />}></Suspense>;
   if (isError)
     return <div>Error: {error?.message || "Something went wrong"}</div>;
 
