@@ -25,7 +25,9 @@ const CoinTable = () => {
     navigate(`/details/${id}`);
   }
 
-  if (isLoading) return <Suspense fallback={<Instagram />}></Suspense>;
+  if (isLoading) {
+    return <Suspense fallback={<Instagram />}></Suspense>;
+  }
   if (isError)
     return <div>Error: {error?.message || "Something went wrong"}</div>;
 

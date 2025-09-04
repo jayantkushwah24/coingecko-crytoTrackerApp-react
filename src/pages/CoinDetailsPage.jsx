@@ -1,7 +1,8 @@
-import  { useEffect, useMemo, useState } from "react";
+import { Suspense, useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
 import { fetchCoinDetails } from "../service/fetchCoinDetails";
 import { useQuery } from "@tanstack/react-query";
+import { Instagram } from "react-content-loader";
 
 const CoinDetailsPage = () => {
   const { coinId } = useParams();
@@ -56,7 +57,7 @@ const CoinDetailsPage = () => {
   }, [coinId, data]);
 
   if (isLoading) {
-    return <div>downloading coin details...</div>;
+    return <Suspense fallback={<Instagram />}></Suspense>;
   }
   if (isError) {
     return <div>Something went wrong</div>;

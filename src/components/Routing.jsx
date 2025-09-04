@@ -3,7 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import { MainLayout } from "../pages/Layout";
 import { Instagram } from "react-content-loader";
 import { lazy, Suspense } from "react";
-import { CustomErrorBoundary } from "./CustomErrorBoundary";
+import CustomErrorBoundary from "./CustomErrorBoundary";
 
 const Home = lazy(() => import("../pages/Home"));
 const CoinDetailsPage = lazy(() => import("../pages/CoinDetailsPage"));
